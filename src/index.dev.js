@@ -1,24 +1,23 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger'
-import { Provider } from 'react-redux'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import { syncHistory, routeReducer } from 'redux-simple-router'
-import getRoutes from './routes.js'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
+import { syncHistory, routeReducer } from 'redux-simple-router';
+import getRoutes from './routes.js';
 
-import reducers from './redux/reducers'
+import reducers from './redux/reducers';
 
-//combine reducers
+// combine reducers
 let combinedReducer = combineReducers(Object.assign({}, reducers, {
-  routing: routeReducer
+  routing: routeReducer,
 }));
 
 const loggerMiddleware = createLogger();
 
 const reduxRouterMiddleware = syncHistory(browserHistory);
-
 
 const createStoreWithMiddleware = applyMiddleware(
   thunkMiddleware,
@@ -31,16 +30,13 @@ const store = createStoreWithMiddleware(combinedReducer);
 // Required for replaying actions from devtools to work
 reduxRouterMiddleware.listenForReplays(store);
 
-//Helper component to force rerender on hot reload
-//Reference: https://github.com/capaj/systemjs-hot-reloader/issues/13
+// Helper component to force rerender on hot reload
+// Reference: https://github.com/capaj/systemjs-hot-reloader/issues/13
 
 class RenderForcer extends React.Component {
-  constructor() {
-    super()
-  }
 
   componentWillMount() {
-    this.forceUpdate(); // a little hack to help us rerender when this module is reloaded
+    this.forceUpdate(); // a hack to help us rerender when this module is reloaded
   }
 
   render() {
@@ -50,7 +46,7 @@ class RenderForcer extends React.Component {
           { getRoutes() }
         </Router>
       </Provider>
-    )
+    );
   }
 }
 

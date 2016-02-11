@@ -30,11 +30,16 @@
     "express": "^4.13.4"
   },
   "devDependencies": {
+    "babel-eslint": "^5.0.0-beta6",
     "body-parser": "^1.14.2",
     "chokidar-socket-emitter": "^0.4.2",
     "cors": "^2.7.1",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^4.0.0",
+    "eslint-plugin-react": "^3.16.1",
     "express": "^4.13.3",
-    "jspm": "^0.16.19",
+    "jsonwebtoken": "^5.5.4",
+    "jspm": "^0.16jspm .19",
     "jwt-simple": "^0.4.1",
     "nodemon": "^1.8.1"
   },
@@ -46,13 +51,16 @@
       "axios": "npm:axios@^0.9.0",
       "history": "npm:history@^2.0.0-rc2",
       "immutable": "npm:immutable@^3.7.6",
+      "jwt-decode": "npm:jwt-decode@^1.5.1",
       "react": "npm:react@^0.14.6",
+      "react-bootstrap": "npm:react-bootstrap@^0.28.2",
       "react-dom": "npm:react-dom@^0.14.6",
       "react-redux": "npm:react-redux@^4.0.6",
       "react-router": "npm:react-router@^2.0.0-rc5",
       "redux": "npm:redux@^3.0.5",
       "redux-simple-router": "npm:redux-simple-router@^2.0.4",
-      "redux-thunk": "npm:redux-thunk@^1.0.3"
+      "redux-thunk": "npm:redux-thunk@^1.0.3",
+      "systemjs-hot-reloader": "github:capaj/systemjs-hot-reloader@^0.5.5"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",

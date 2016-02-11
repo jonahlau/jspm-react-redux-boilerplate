@@ -1,27 +1,39 @@
-import {SIGN_IN_START, SIGN_IN_SUCCESS, SIGN_IN_ERROR, SIGN_OUT} from './authConstants'
-import Immutable from 'immutable'
+import { LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAIL, LOG_OUT } from './authConstants';
+import Immutable from 'immutable';
+import jwtDecode from 'jwt-decode';
 
 const initialState = Immutable.Map({
-  authenticated: false,
-  pendingResponse: false,
-  authUser: {}
+  isAuthenticated: false,
+  isAuthenticating: false,
+  authUser: Immutable.Map({}),
+  token: null,
 });
 
 const authReducer = (state = initialState, action) => {
+  const payload = action.payload;
+
   switch (action.type) {
-    case SIGN_IN_START:
-      return state.set('pendingResponse', true);
-    case SIGN_IN_SUCCESS:
+
+    case LOG_IN_REQUEST:
+      return state.set('isAuthenticating', true);
+
+    case LOG_IN_SUCCESS:
       return state.merge({
-        'pendingResponse': false,
-        'authenticated': true,
-        'authUser': action.user
+        isAuthenticating: false,
+        isAuthenticated: true,
+        authUser: Immutable.fromJS(jwtDecode(payload.token)),
+        token: payload.token,
       });
-    case SIGN_OUT:
+
+    case LOG_IN_FAIL:
       return initialState;
+
+    case LOG_OUT:
+      return initialState;
+
     default:
       return state;
   }
 };
 
-export default authReducer
+export default authReducer;

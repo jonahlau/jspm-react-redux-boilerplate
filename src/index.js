@@ -1,19 +1,17 @@
-'use strict';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { syncHistory, routeReducer } from 'redux-simple-router';
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunkMiddleware from 'redux-thunk'
-import { Provider } from 'react-redux'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import { syncHistory, routeReducer } from 'redux-simple-router'
+import getRoutes from './routes';
 
-import getRoutes from './routes'
-
-import reducers from './redux/reducers'
+import reducers from './redux/reducers';
 
 let combinedReducer = combineReducers(Object.assign({}, reducers, {
-  routing: routeReducer
+  routing: routeReducer,
 }));
 
 const reduxRouterMiddleware = syncHistory(browserHistory);
@@ -37,8 +35,6 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-let unsubscribe = store.subscribe((state) =>
-  console.log(store.getState())
-);
+const unsubscribe = store.subscribe(() => console.log(store.getState()));
 
 unsubscribe();
