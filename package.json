@@ -39,7 +39,7 @@
     "eslint-plugin-react": "^3.16.1",
     "express": "^4.13.3",
     "jsonwebtoken": "^5.5.4",
-    "jspm": "^0.16jspm .19",
+    "jspm": "^0.16.19",
     "jwt-simple": "^0.4.1",
     "nodemon": "^1.8.1"
   },
